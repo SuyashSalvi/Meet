@@ -18,8 +18,8 @@ const userDetail = { username,roomID }
 // var mypeer = new Peer()
 var mypeer = new Peer('',{
     path:'/peerjs',
-    host:'/',    //localhost
-    port:'443'  //3000
+    host:'localhost',    //localhost
+    port:'3000'  //443
 })
 
 const peers = {}
@@ -59,12 +59,17 @@ mypeer.on('call', (call)=> {
     socket.on('getUserResponse',(usersList)=>{
       console.log(usersList)
       for (const u in usersList){
-        $("ol").append(`<li class="message">${usersList[u].username} </li>`);
+        $("ol").append(`<li id="${usersList[u].username}" class="message">${usersList[u].username} </li>`);
         }
     })
+    socket.on('getUserResponseRem',(username)=>{
+      const ID = '#'.concat(username)
+      console.log('removeeeeeeeeeeeeeee',ID)
+        $(ID).remove();
+    })
     socket.on('getUserResponseCurr',(userCurr)=>{
-      console.log(userCurr)
-        $("ol").append(`<li class="message">${userCurr.username} </li>`);
+      console.log(userCurr.username)
+        $("ol").append(`<li id="${userCurr.username}" class="message">${userCurr.username} </li>`);
         
     })
   // Chat:input value
