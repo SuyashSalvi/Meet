@@ -161,7 +161,7 @@ const leaveMeet = ()=>{
       socket.emit('leave',()=>{
         console.log('user left')
       })
-      window.location.href='http://localhost:3000/thankyou'
+      window.location.href='/thankyou'
       // window.onbeforeunload = function() { return "Your work will be lost."; };
       
 }
