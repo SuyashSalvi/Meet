@@ -49,6 +49,7 @@ io.on('connection',(socket)=>{
         const userCurr = getUser(userID)
         console.log(userList)
         console.log(userCurr)
+        socket.emit('UpdateParti',roomID)
         // socket.on('connection-request',(roomID,username,userID)=>{
        socket.broadcast.to(roomID).emit('user-connected',username,userID)
        socket.broadcast.to(roomID).emit('user-connection-notification',' has joined!',username)

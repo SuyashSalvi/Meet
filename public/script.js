@@ -12,6 +12,7 @@ myVideo.muted = true
 const { username, roomID } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 const userDetail = { username,roomID }
 
+let userLists = []
 
 
 //PeerJS defination
@@ -19,7 +20,7 @@ const userDetail = { username,roomID }
 var mypeer = new Peer('',{
     path:'/peerjs',
     host:'/',    //localhost
-    port:'443'  //3000
+    port:'443'  //443
 })
 
 const peers = {}
@@ -55,9 +56,13 @@ mypeer.on('call', (call)=> {
       setTimeout(connectNewUser,3000,userID,stream)
     })
     //collecting users to display participants
-    socket.emit('getUserRequest',roomID)
+    
+      socket.emit('getUserRequest',roomID)
+    
+    
     socket.on('getUserResponse',(usersList)=>{
       console.log(usersList)
+      userLists = usersList
       for (const u in usersList){
         $("ol").append(`<li id="${usersList[u].username}" class="message">${usersList[u].username} </li>`);
         }
