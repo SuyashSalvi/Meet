@@ -10,7 +10,58 @@ const peerServer = ExpressPeerServer(server,{
     debug:true
 });
 let date_ob = new Date();
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
+// const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
+
+users = []
+
+const addUser = (roomID,userID,username)=>{
+    username = username.trim().toLowerCase()
+    room = roomID
+    if (!username || !room) {
+        return {
+            error: 'Username and room are required!'
+        }
+    }
+
+    // Check for existing user
+    const existingUser = users.find((user) => {
+        return user.room === room && user.username === username
+    })
+
+    // Validate username
+    if (existingUser) {
+        return {
+            error: 'Username is in use!'
+        }
+    }else{
+         // Store user
+        const user = { userID, username, room }
+    users.push(user)
+    console.log(users)
+    return { user }
+    }
+
+   
+    
+    
+}
+
+const removeUser = (id) => {
+    const index = users.findIndex((user) => user.userID === id)
+
+    if (index !== -1) {
+        return users.splice(index, 1)[0]
+    }
+}
+
+const getUser = (id) => {
+    return users.find((user) => user.userID === id)
+}
+
+const getUsersInRoom = (room) => {
+    room = room.trim().toLowerCase()
+    return users.filter((user) => user.room === room)
+}
 
 const window = new Window();
 

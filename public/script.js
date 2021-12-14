@@ -19,8 +19,8 @@ let userLists = []
 // var mypeer = new Peer()
 var mypeer = new Peer('',{
     path:'/peerjs',
-    host:'/',    //localhost
-    port:'443'  //443
+    host:'localhost',    //localhost
+    port:'3000'  //443
 })
 
 const peers = {}
@@ -63,6 +63,7 @@ mypeer.on('call', (call)=> {
     socket.on('getUserResponse',(usersList)=>{
       console.log(usersList)
       userLists = usersList
+      console.log(userLists)
       for (const u in usersList){
         $("ol").append(`<li id="${usersList[u].username}" class="message">${usersList[u].username} </li>`);
         }
