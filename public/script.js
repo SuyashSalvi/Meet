@@ -19,8 +19,8 @@ let userLists = []
 // var mypeer = new Peer()
 var mypeer = new Peer('',{
     path:'/peerjs',
-    host:'localhost',    //localhost
-    port:'3000'  //443
+    host:'/',    //localhost
+    port:'443'  //443
 })
 
 const peers = {}
