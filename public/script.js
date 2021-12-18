@@ -54,10 +54,11 @@ mypeer.on('call', (call)=> {
       console.log(peers)
       // connectNewUser(userID,stream)
       setTimeout(connectNewUser,3000,userID,stream)
+      socket.emit('getUserRequest',roomID)
     })
     //collecting users to display participants
     
-      socket.emit('getUserRequest',roomID)
+     
     
     
     socket.on('getUserResponse',(usersList)=>{
